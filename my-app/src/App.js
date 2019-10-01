@@ -1,37 +1,40 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios'
+import GitCard from './components/GitCard'
 
 class App extends React.Component{
   constructor(){
     super()
     this.state = {
-      currentUser:'uziasr',
+      currentUser:[],
       followers: []
     }
   }
   componentDidMount(){
-    console.log('hello this component mounted')
+    axios
+    .get(`https://api.github.com/users/uziasr`)
+    .then(res=>{
+      console.log(res.data)
+      this.setState({
+        currentUser:res.data
+      })
+      })
+    .catch(err=>console.log(err))
+    // console.log(this.currentUser) // returning undefined
   }
 
+  componentDidUpdate(){
+      
+  }
+
+
   render(){
-    console.log('but did this render first?')
+
     return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <GitCard user={this.state.currentUser}/>
     </div>
   );}
 }
