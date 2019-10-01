@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "reactstrap": "^8.0.1",
+    "styled-components": "^4.4.0"
+  }
+}
